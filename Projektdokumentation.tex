@@ -1,0 +1,91 @@
+\documentclass[
+    ngerman,
+    toc=listof,
+    toc=bibliography,
+    footnotes=multiple,
+    parskip=half,
+    numbers=noendperiod,
+    11pt
+]{scrartcl}
+\usepackage[utf8]{inputenc}
+
+\input{general/ge_meta}
+\input{settings/se_packages}
+\input{settings/se_commands}
+\input{settings/se_pagestyle}
+
+
+  
+\begin{document}
+    % Deckblatt --------------------------------------------------------------
+    \phantomsection
+    \thispagestyle{plain}
+    \pdfbookmark[1]{Deckblatt}{deckblatt}
+    \input{Deckblatt}
+    \cleardoublepage
+    
+    % Inhaltsverzeichnis -----------------------------------------------------
+    \phantomsection
+    \newcounter{savepage}
+    \pagenumbering{roman}
+    \addcontentsline{toc}{section}{Inhaltsverzeichnis}
+    \tableofcontents
+    \cleardoublepage
+    
+    % Abbildungsverzeichnis (kein Page-Break) --------------------------------
+    \phantomsection
+    \listoffigures
+    
+    % Tabellenverzeichnis ----------------------------------------------------
+    \phantomsection
+    \listoftables
+    \cleardoublepage
+    
+    % Abkürzungsverzeichnis --------------------------------------------------
+    \phantomsection
+    \newcommand{\abkvz}{Abkürzungsverzeichnis}
+    \renewcommand{\nomname}{\abkvz}
+    \section*{\abkvz}
+    \markboth{\abkvz}{\abkvz}
+    \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+    \input{Acronym}
+    \clearpage
+    
+    %Hyperlink Color
+    \definecolor{hyperref}{RGB}{0,68,102}
+    \hypersetup{
+    linkcolor = hyperref,
+    anchorcolor = hyperref,
+    citecolor = hyperref,
+    filecolor = hyperref,
+    urlcolor = hyperref
+    }
+    
+    % Inhalt -----------------------------------------------------------------
+    \setcounter{savepage}{\arabic{page}}
+    \pagenumbering{arabic}
+    \input{Inhalt}
+    
+    % Literatur ------------------------------------------------------------------
+    \clearpage
+    \pagenumbering{roman}
+    \setcounter{page}{\thesavepage}
+    \input{Literatur}
+    \clearpage
+    
+    % Anhang -----------------------------------------------------------------
+    \clearpage
+    \appendix
+    \setcounter{savepage}{\arabic{page}}
+    \pagenumbering{Roman}
+    \input{Anhang}
+    
+    % Erklärung --------------------------------------------------------------
+    \clearpage
+    \phantomsection
+    \pagenumbering{roman}
+    \setcounter{page}{\thesavepage}
+    \input{Erklaerung}
+    \cleardoublepage
+    
+\end{document}

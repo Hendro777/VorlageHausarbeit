@@ -1,0 +1,75 @@
+% !TEX root = ../Projektdokumentation.tex
+
+% Vorgaben IHK -----------------------------------------------------------------
+% Schriftgröße: 11
+% Zeilenabstand: 1,5 zeilig
+% Rand: 2,5 cm (links, rechts, oben, unten)
+% Ausrichtung: Blocksatz --> Standardmäßig in LaTeX aktiv
+% Seitenzahlen: Fußzeile, zentriert, beginnend mit der Dokumentation
+% Maximale Tiefe: 1.1.1 / subsubsections
+
+\geometry{a4paper, margin=25mm}
+
+\usepackage[
+	automark, % Kapitelangaben in Kopfzeile automatisch erstellen
+	headsepline, % Trennlinie unter Kopfzeile
+	ilines % Trennlinie linksbündig ausrichten
+]{scrlayer-scrpage}
+
+\pagestyle{scrheadings}
+
+% Kopfzeile ---------------------------------------------------------------------
+\renewcommand*\sectionmarkformat{} % Keine Nummerierung im Kopf
+\renewcommand{\headfont}{\normalfont} % Schriftform der Kopfzeile
+\ihead{\large{\titel}\\[1ex] \textit{\headmark}}
+\automark{section}
+\chead{}
+\ohead{\includegraphics[scale=0.2]{\betriebLogo}}
+\setlength{\headheight}{15mm} % Höhe der Kopfzeile
+
+% Fußzeile ---------------------------------------------------------------------
+\ifoot{\autorName}
+\cfoot{\pagemark}
+\ofoot{\betriebName}
+\setlength{\footheight}{10mm} % Höhe der Fußzeile
+
+% Abstand zwischen Nummerierung und Überschrift definieren
+\newcommand{\headingSpace}{1.0 cm}
+
+% Abschnittsüberschriften im selben Stil wie beim Inhaltsverzeichnis einrücken
+\renewcommand*{\othersectionlevelsformat}[3]{
+  \makebox[\headingSpace][l]{#3\autodot}
+}
+
+%\cftsetindents{chapter}{0.0cm}{\headingSpace}
+\cftsetindents{section}{0.0cm}{\headingSpace}
+\cftsetindents{subsection}{1.0cm}{1.0 cm}
+\cftsetindents{subsubsection}{2.0cm}{1.45 cm}
+\cftsetindents{figure}{0.0cm}{\headingSpace}
+\cftsetindents{table}{0.0cm}{\headingSpace}
+
+
+% Allgemeines -----------------------------------------------------------------
+
+\setlength{\textheight}{665pt} % Größe des "Textfeldes"
+
+\onehalfspacing % Zeilenabstand 1,5 Zeilen
+\frenchspacing % erzeugt ein wenig mehr Platz hinter einem Punkt
+
+\usepackage{blindtext} % Lipsum
+
+\counterwithout{footnote}{section} % Fußnoten fortlaufend durchnummerieren
+\setcounter{tocdepth}{3} % im Inhaltsverzeichnis werden die Kapitel bis zum Level der subsubsection übernommen
+\setcounter{secnumdepth}{3} % Kapitel bis zum Level der subsubsection werden nummeriert
+
+% Aufzählungen anpassen
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+
+% Tabellenfärbung
+\definecolor{heading}{rgb}{0.64,0.78,0.86}
+\definecolor{odd}{rgb}{0.9,0.9,0.9}
+
+\usepackage{float}
+
